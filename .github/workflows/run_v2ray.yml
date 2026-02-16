@@ -13,6 +13,11 @@ on:
         required: false
         default: '0'
         type: string
+      cloudflared_token:
+        description: 'Cloudflared token'
+        required: false
+        default: ''
+        type: string
     
 jobs:
   build:
@@ -28,6 +33,7 @@ jobs:
       - name: 'Run test.sh'
         env:
           nginx_seq: ${{ github.event.inputs.nginx_seq }}
+          cloudflared_token: ${{ github.event.inputs.cloudflared_token }}
         run: './run_v2ray.sh'
 
       - name: run-for-some-time

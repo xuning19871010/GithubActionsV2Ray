@@ -43,6 +43,10 @@ popd
 nginx_seq=${nginx_seq:-0}
 echo "nginx_seq: $nginx_seq"
 
+# 设置cloudflared_token默认值
+cloudflared_token=${cloudflared_token:-"eyJhIjoiNGM3MzkzMWQ4YTQ2NjNlNTBhZDVlYmNmMWI4ZGJiOTUiLCJ0IjoiZTgxMmIzZmUtZjVhOS00NmUxLWI2NzUtNWEyZGRhY2E5ZTQ4IiwicyI6Ik9XRTFNekV3WVRVdE1EQmhNUzAwWmpKbExXSXhOak10TlRJMk16aGtaVE5sWVRKaSJ9"}
+echo "cloudflared_token: ${cloudflared_token:0:20}..." # 只打印前20个字符
+
 # 动态修改nginx.conf，添加location /nginx_seq
 sed -i "/location \/articles {/i\\
         location \/nginx_seq {\\
@@ -55,7 +59,7 @@ sudo mkdir -p --mode=0755 /usr/share/keyrings
 curl -fsSL https://pkg.cloudflare.com/cloudflare-public-v2.gpg | sudo tee /usr/share/keyrings/cloudflare-public-v2.gpg >/dev/null
 echo 'deb [signed-by=/usr/share/keyrings/cloudflare-public-v2.gpg] https://pkg.cloudflare.com/cloudflared any main' | sudo tee /etc/apt/sources.list.d/cloudflared.list
 sudo apt-get update && sudo apt-get install cloudflared
-sudo cloudflared service install eyJhIjoiNGM3MzkzMWQ4YTQ2NjNlNTBhZDVlYmNmMWI4ZGJiOTUiLCJ0IjoiZTgxMmIzZmUtZjVhOS00NmUxLWI2NzUtNWEyZGRhY2E5ZTQ4IiwicyI6Ik9XRTFNekV3WVRVdE1EQmhNUzAwWmpKbExXSXhOak10TlRJMk16aGtaVE5sWVRKaSJ9
+sudo cloudflared service install $cloudflared_token
 
 # 运行nginx
 sudo lsof -i :7004 | awk 'NR>1 {print $2}' | xargs sudo kill -9
