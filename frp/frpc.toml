@@ -1,9 +1,6 @@
 serverAddr = "81.71.136.135"
 serverPort = 7000
 auth.token = "7Vy&DJehe^ZG2TeT"
-transport.tcp_mux = true
-transport.tcp_keepalive.enabled = true
-transport.pool_count = 5
 log.level = "info"
 
 [[proxies]]
