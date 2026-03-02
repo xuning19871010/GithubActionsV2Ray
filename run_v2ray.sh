@@ -73,7 +73,7 @@ popd
 # 运行FRP客户端
 echo "Starting FRP client..."
 pushd frp
-[ ! -f "frpc" ] && tar -xzf frp_0.67.0_linux_amd64.tar.gz --strip-components=1 && chmod +x frpc
+[ ! -f "frpc" ] && tar -xzf frp_0.67.0_linux_amd64.tar.gz --strip-components=1 --exclude="*.toml" && chmod +x frpc
 sudo nohup ./frpc -c frpc.toml > ../logs/frpc.log 2>&1 &
 echo "FRP client started, log: logs/frpc.log"
 popd
