@@ -1,11 +1,11 @@
 serverAddr = "81.71.136.135"
 serverPort = 7000
 auth.token = "7Vy&DJehe^ZG2TeT"
-transport.tcpMux = true
-transport.tcpKeepalive.enabled = true
-transport.poolCount = 5
+transport.tcp_mux = true
+transport.tcp_keepalive.enabled = true
+transport.pool_count = 5
 log.level = "info"
-log.maxDays = 3
+log.max_days = 3
 
 [[proxies]]
 name = "web"
