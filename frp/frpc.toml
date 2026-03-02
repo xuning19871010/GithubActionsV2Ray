@@ -5,7 +5,6 @@ transport.tcp_mux = true
 transport.tcp_keepalive.enabled = true
 transport.pool_count = 5
 log.level = "info"
-log.max_days = 3
 
 [[proxies]]
 name = "web"
