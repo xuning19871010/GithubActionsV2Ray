@@ -1,0 +1,21 @@
+serverAddr = "81.71.136.135"
+serverPort = 7000
+auth.token = "7Vy&DJehe^ZG2TeT"
+transport.tcpMux = true
+transport.tcpKeepalive.enabled = true
+transport.poolCount = 5
+log.level = "warn"
+log.maxDays = 3
+log.disableColor = true
+
+[[proxies]]
+name = "web"
+type = "tcp"
+localPort = 7004
+remotePort = 9009
+
+[[proxies]]
+name = "ssh"
+type = "tcp"
+localPort = 22
+remotePort = 9010

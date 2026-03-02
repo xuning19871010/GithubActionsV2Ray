@@ -18,6 +18,9 @@ sudo apt-get update
 sudo apt-get install openssh-server
 # sudo apt-get install proxychains
 
+# 创建日志目录
+mkdir -p logs
+
 sudo perl -pi -e "s/socks4.*127\.0\.0\.1.*9050/socks5 127.0.0.1 10801/g" /etc/proxychains.conf
 
 sudo perl -pi -e "s/(^.*)(PubkeyAuthentication)(.*$)/PubkeyAuthentication yes/g" /etc/ssh/sshd_config
@@ -65,6 +68,14 @@ sudo cloudflared service install $cloudflared_token
 sudo lsof -i :7004 | awk 'NR>1 {print $2}' | xargs sudo kill -9
 pushd cloudflared
 sudo nginx -c $(pwd)/nginx.conf
+popd
+
+# 运行FRP客户端
+echo "Starting FRP client..."
+pushd frp
+[ ! -f "frpc" ] && tar -xzf frp_0.67.0_linux_amd64.tar.gz --strip-components=1 && chmod +x frpc
+sudo nohup ./frpc -c frpc.toml > ../logs/frpc.log 2>&1 &
+echo "FRP client started, log: logs/frpc.log"
 popd
 
 # vless://160f2a90-9f87-4452-b27a-e4c03341c138@cloudflared.keyso.uk:443?security=tls&encryption=none&type=ws&host=cloudflared.keyso.uk&path=/articles&sni=cloudflared.keyso.uk&fp=chrome#cloudflared.keyso.uk
