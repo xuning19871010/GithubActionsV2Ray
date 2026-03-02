@@ -4,7 +4,7 @@ auth.token = "7Vy&DJehe^ZG2TeT"
 transport.tcpMux = true
 transport.tcpKeepalive.enabled = true
 transport.poolCount = 5
-log.level = "warn"
+log.level = "info"
 log.maxDays = 3
 log.disableColor = true
 
