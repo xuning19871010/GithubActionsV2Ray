@@ -1,0 +1,69 @@
+{
+  "log": {
+    "access": "./bridge_43.135.118.188_access.log",
+    "error": "./bridge_43.135.118.188_error.log",
+    "loglevel": "error"
+  },
+  "reverse": {
+    "bridges": [
+      {
+        "tag": "bridge",
+        "domain": "private.cloud.com"
+      }
+    ]
+  },
+  "outbounds": [
+    {
+      "tag": "bridgeout",
+      "protocol": "freedom"
+    },
+    {
+      "tag": "interconn",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "43.135.118.188",
+            "port": 80,
+            "users": [
+              {
+                "id": "160f2a90-9f87-4452-b27a-e4c03341c138",
+                "encryption": "none",
+                "security": "none",
+                "level": 0
+              }
+            ]
+          }
+        ],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "ws",
+        "wsSettings": {
+          "path": "/tunnel_github_runner"
+        }
+      }
+    }
+  ],
+  "routing": {
+    "rules": [
+      {
+        "type": "field",
+        "inboundTag": [
+          "bridge"
+        ],
+        "domain": [
+          "full:private.cloud.com"
+        ],
+        "outboundTag": "interconn"
+      },
+      {
+        "type": "field",
+        "inboundTag": [
+          "bridge"
+        ],
+        "outboundTag": "bridgeout"
+      }
+    ]
+  }
+}

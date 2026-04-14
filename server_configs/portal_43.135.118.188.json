@@ -1,0 +1,50 @@
+{
+  "log": {
+    "access": "/var/log/xray/portal_github_runner_access.log",
+    "error": "/var/log/xray/portal_github_runner_error.log",
+    "loglevel": "Warning"
+  },
+  "reverse": {
+    "portals": [
+      {
+        "tag": "portal",
+        "domain": "private.cloud.com"
+      }
+    ]
+  },
+  "inbounds": [
+    {
+      "tag": "tunnel_github_runner",
+      "listen": "127.0.0.1",
+      "port": 5763,
+      "protocol": "vless",
+      "settings": {
+        "clients": [
+          {
+            "id": "160f2a90-9f87-4452-b27a-e4c03341c138",
+            "level": 0
+          }
+        ],
+        "decryption": "none",
+        "fallbacks": []
+      },
+      "streamSettings": {
+        "network": "ws",
+        "wsSettings": {
+          "path": "/tunnel_github_runner"
+        }
+      }
+    }
+  ],
+  "routing": {
+    "rules": [
+      {
+        "type": "field",
+        "inboundTag": [
+          "tunnel_github_runner"
+        ],
+        "outboundTag": "portal"
+      }
+    ]
+  }
+}

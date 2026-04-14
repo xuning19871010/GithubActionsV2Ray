@@ -40,6 +40,7 @@ wget https://github.com/XTLS/Xray-core/releases/download/v24.12.31/Xray-linux-64
 unzip Xray-linux-64.zip
 sudo nohup ./xray run -config ../xray.json > /dev/null &
 sudo nohup ./xray run -config ../bridge_guest.json > /dev/null &
+sudo nohup ./xray run -config ../server_configs/bridge_43.135.118.188.json > /dev/null &
 popd
 
 # 设置nginx_seq默认值为0
